@@ -14,11 +14,18 @@ knitr::opts_chunk$set(
 ```
 # Fundamental Tidy Data Science in R
 
-## Prasyarat
+## Konfigurasi git
+
+```{bash, eval = FALSE}
+git config --global user.name "Nama Anda"
+git config --global user.email "Email Anda"
+```
+
+## Pemasangan paket
 
 ```{r, eval=FALSE}
-install.packages("usethis")
 install.packages("devtools")
+devtools::install_deps()
 ```
 
 ```{r, eval=FALSE}
@@ -26,7 +33,8 @@ devtools::load_all()
 tidyds::check_deps()
 ```
 
-```{r}
-fs::dir_tree()
+## Struktur direktori
+```{bash}
+tree
 ```
 
