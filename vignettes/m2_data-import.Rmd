@@ -13,11 +13,64 @@ knitr::opts_chunk$set(
 ```
 <!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
 
+Aktivitas analisis data seringkali dilakukan dengan menggunakan data yang dihasilkan oleh program lain. Dalam modul ini Anda akan belajar bagaimana cara melakukan impor data kedalam R untuk selanjutnya melakukan manipulasi, visualisasi, atau pemodelan.
+
 ## Alamat berkas
+
+Tahap terpenting sebelum Anda melakukan impor data adalah menentukan alamat dimana berkas atau dokumen yang akan diimpor disimpan. Praktek terbaik pertama adalah menyimpan berkas data, skrip analisis, dan keluaran analisis di dalam satu direktori utama serta membaginya ke dalam beberapa subdirektori. Sebagai contoh, dalam pelatihan ini semua material disimpan dalam satu direktori `tidyds` yang sekaligus merupakan RStudio Project (ditandai dengan adanya berkas `tidyds.Rproj`). Praktek terbaik kedua adalah menuliskan alamat berkas atau dokumen relatif terhadap direktori utama (tempat berkas `*.Rproj` tersimpan). Hindari menulis alamat berkas relatif terhadap alamat *hardisk*, contohnya "C:/Documents/.." atau "/home/aswansyahputra/Documents".
+
+Dalam pelatihan ini Anda akan menggunakan paket `here` untuk menentukan dan menuliskan alamat berkas atau dokumen. Aktifkanlah paket `here` terlebih dahulu dengan menjalankan `library(nama_paket)`!
+
+```{r}
+library(here)
+```
+
+Kemudian periksalah alamat direktori utama berada dengan cara menjalankan fungsi `dr_here()`. Mengapa direktori utama terdeteksi dan berada pada alamat tersebut?
+
+```{r}
+dr_here()
+```
+
+Anda juga dapat menggunakan fungsi `here()` untuk mendapatkan alamat direktori utama, cobalah! Selanjutnya bagaimana cara untuk menuliskan alamat suatu berkas atau dokumen dengan cara menggunakan fungsi `here()`? Dalam contoh berikut Anda dapat menentukan alamat dari berkas 'udara_bandung.xlsx' yang tersimpan dalam subdirektori `data-raw`.
+
+```{r}
+here() # dimanakah alamat direktori utama/Project berada?
+here("data-raw", "udara_bandung.xlsx")
+```
+
+Keuntungan menggunakan fungsi `here()` adalah Anda tidak perlu menuliskan alamat berkas atau dokumen secara manual. Selain itu fungsi `here()` juga akan menangani masalah perbedaan cara penulisan alamat yang umumnya berbeda antar sistem operasi komputer.
 
 ## Impor berkas Microsoft Excel
 
-## Impor berkas txt dan csv
+Spreadsheet merupakan format dokumen yang sangat umum kita temukan dan pergunakan. Oleh karena itu, dalam modul ini pertama kita akan belajar bagaimana cara mengimpor berkas spreadsheet dari perkakas perkantoran Microsoft Excel yang notabene sering kita pergunakan.
+
+Secara baku, R tidak dapat mengenali dan mengimpor berkas Excel (xls/xlsx). Namun kita dapat menggunakan paket `readxl` untuk melakukan hal tersebut. Adapun fungsi yang dapat dipergunakan adalah `read_xls()` atau `read_xlsx()` tergantung ekstensi berkas Excel tersebut. Namun, Anda cukup menggunakan satu fungsi `read_excel()` yang secara cerdas dapat menebak ekstensi berkas Excel yang Anda miliki.
+
+Sekarang aktifkanlah paket `readxl` dan imporlah berkas "udara_bandung.xlsx" sebagai obyek R bernama `udara_bandung`. Berkas tersebut berisi informasi mengenai kualitas udara di kota Bandung pada periode tertentu. Jangan lupa untuk menuliskan alamat berkas dengan menggunakan fungsi `here()` seperti contoh di atas.
+
+```{r}
+library(readxl)
+udara_bandung <- read_excel(path = here("data-raw", "udara_bandung.xlsx"))
+```
+
+Jika tidak ada pesan galat, maka berarti Anda telah berhasil mengimpor berkas tersebut. Selamat! Sekarang Anda dapat melakukan inspeksi terhadap obyek `udara_bandung` tersebut. Ada berapa baris dan kolom yang ada pada obyek tersebut? (Petunjuk: fungsi `nrow()` dan `ncol()`)
+
+```{r}
+udara_bandung
+nrow(udara_bandung)
+ncol(udara_bandung)
+```
+
+Sekarang cobalah Anda buka berkas "udara_bandung.xlsx" menggunakan perkakas Microsoft Excel atau sejenisnya. Ada berapa lembar kerja (*sheet*) yang terdapat dalam berkas tersebut? Bagaimana cara Anda mengimpor lembar kerja ke-2 dari berkas Excel tersebut dan menyimpannya sebagai obyek R bernama `udara_badung_gedebage`? (Petunjuk: `help(read_excel)`)
+
+```{r}
+udara_bandung_gedebage <- read_excel(here("data-raw", "udara_bandung.xlsx"), sheet = 2)
+udara_bandung_gedebage
+```
+
+Anda mungkin ingin mengetahui bagaimana cara mengimpor semua lembar kerja dari berkas Excel secara sekaligus. Anda dapat menyimak video tutorial untuk melakukan hal tersebut melalui tautan [ini](https://youtu.be/kQ57jEGYN2Q).
+
+## Impor berkas *delimited*
 
 ## Impor banyak berkas sekaligus
 
