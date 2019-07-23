@@ -34,7 +34,7 @@ tidyds::check_deps()
 ```
 
 ## Struktur direktori
-```{bash}
+```{bash, echo = FALSE}
 tree
 ```
 
