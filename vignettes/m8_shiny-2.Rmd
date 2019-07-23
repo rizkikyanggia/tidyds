@@ -1,0 +1,14 @@
+---
+title: "Shiny for machine learning"
+output: 
+  github_document:
+    df_print: "tibble"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+<!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
