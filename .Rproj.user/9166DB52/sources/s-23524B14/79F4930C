@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563878810553.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "79F4930C",
+    "lastKnownWriteTime" : 1563867898,
+    "last_content_update" : 1563867898,
+    "path" : "~/Projects/r-academy/tidyds/vignettes/m1_essentials.Rmd",
+    "project_path" : "vignettes/m1_essentials.Rmd",
+    "properties" : {
+        "cursorPosition" : "4,22",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
