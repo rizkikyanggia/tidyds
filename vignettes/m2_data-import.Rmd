@@ -1,8 +1,6 @@
 ---
 title: "Data import and troubleshoots"
-output: 
-  github_document:
-    df_print: "tibble"
+output: github_document
 ---
 
 ```{r, include = FALSE}

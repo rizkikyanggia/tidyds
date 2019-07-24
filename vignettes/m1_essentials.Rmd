@@ -1,8 +1,6 @@
 ---
 title: "Essentials"
-output: 
-  github_document:
-    df_print: "tibble"
+output: github_document
 ---
 
 ```{r, include = FALSE}
@@ -13,62 +11,124 @@ knitr::opts_chunk$set(
 ```
 <!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
 
-## R Markdown
-Ini merupakan dokumen R Markdown yang dapat digunakan untuk membuat dokumen HTML, PDF, dan bahkan dokumen berekstensi docx atau odt. Anda dapat membuat dokumen tulisan, salindia presentasi, dan laman web statis maupun interaktif dengan melalui R Markdown. Penggunaan R Markdown dalam proyek analisis data akan membuat alur kerja menjadi lebih mudah dan *reproducible*. Informasi lebih lanjut mengenai R Markdown dapat dilihat pada pranala [ini](http://rmarkdown.rstudio.com).
+> Dalam modul ini Anda akan diajak untuk mengenal hal-hal dasar mengenai bahasa pemrograman R untuk digunakan dalam aktivitas data sains.
 
-Kode R dapat dimasukan ke dalam dokumen R Markdown dengan menggunakan *chunck* yang dimulai dengan penanda  tiga *backtick* '```' (dibuat dengan klik tombol Insert - R). Contoh cara untuk penulisan kode R kedalam dokumen R Markdown adalah sebagai berikut:
+## R Markdown
+
+Bgaimana jika ada satu format dokumen yang dapat menggabungkan antara narasi, kode pemrograman, dan keluaran dari kode tersebut dalam satu wadah sekaligus? R Markdown adalah jawabannya! Melalui dokumen R Markdown Anda dapat menuliskan kode analisis data, mengeksekusi kode tersebut, dan memberikan teks interpretasi untuk analisis data tersebut. Jika Anda pernah mendengar atau menggunakan Jupyter Notebook, maka R Markdown adalah ekuivalen untuk format dokumen tersebut. Informasi lebih lanjut mengenai R Markdown dapat dilihat pada pranala [ini](http://rmarkdown.rstudio.com).
+
+Di dokumen R Markdown Anda dapat melakukan pengaturan teks dengan menggunakan Markdown. Silakan klik menu "Help -- Markdown Quick Reference" untuk melihat sontekan cara pengaturan teks menggunakan Markdown langsung dari RStudio. Buatlah penomoran (*numbering*) dan pengaturan untuk teks di bawah ini:
+
+1. **Kalimat ini dicetak tebal**
+2. *Kalimat ini dicetak miring*
+3. [Kalimat ini berisi tautan](https://www.markdownguide.org/getting-started)
+
+Seperti disebutkan sebelumnya bahwa Anda juga dapat menuliskan kode pemrograman di dokumen R Markdown. Namun untuk membedakan antara teks biasa dengan kode pemrograman diperlukan suatu blok yang disebut dengan *chunk* (di Jupyter Notebook disebut sebagai *cell*). Suatu *chunk* ditandai dengan adanya tiga *backtics* "`" pada awal dan akhir baris kode pemrograman seperti contoh berikut:
+
+```
+tulis kode pemrograman
+pada bagian ini
+```
+
+Selanjutnya untuk menegaskan bahasa pemrograman apa yang digunakan dan akan dieksekusidalam suatu *chunk*, Anda dapat menambahkan penanda "{bahasa_pemrograman}" tepat setelah penanda *backtics* di awal *chunk*. R Markdown mendukung dan dapat mengeksekusi beberapa jenis bahasa pemrograman selain R, misalnya Python, SQL, dan Bash. Dalam contoh berikut menunjukan penggunaan bahasa pemrograman R di dalam suatu *chunk*:
 
 ```{r}
 head(mtcars) # melihat 6 baris pertama dari data mtcars, mtcars adalah data bawaan yang tersedia di R
+summary(mtcars) # melihat rigkasan statustik dari data data mtcars
 ```
 
-Jika ingin menjalankan kode R dalam *chunck* tersebut, Anda dapat menggunakan pemintas Ctrl + Enter (menjalankan satu baris kode) atau Ctrl + Shift + Enter (menjalankan semua kode dalam *chunck*). Sekarang buatlah *chunck* baru yang isinya adalah baris kode R berikut: (Petunjuk: Gunakan Ctrl + Alt + I)
+Kombinasi "Ctrl + Alt + I" dapat Anda gunakan untuk membuah *chunk* dengan bahasa pemrograman R. Buatlah *chunk* baru berisi kode pemrograman R sebagai berikut!
 
+```{r}
 filled.contour(volcano,
                color.palette = terrain.colors, 
                plot.title = title("Topografi Gunung Maunga Whau"), 
                key.title = title("Tinggi\n(meter)"))
-
-Setelah selesai membuat dokumen R Markdown yang berisikan konten tulisan beserta kode R, Anda dapat klik tombol **Knit** untuk menghasilkan dokumen baru sesuai dengan format dokumen yang diinginkan. Dalam contoh ini format dokumen keluaran R Markdown setelah menjalankan **Knit** adalah dokumen HTML. Anda dapat mengatur format dokumen keluaran dengan cara mengubah baris *output* pada YAML metadata (lihat baris paling atas dokumen ini) seperti contoh berikut:
-
 ```
----
-title: "Essentials"
-output: html_document
----
-```
+
+Bagaimana cara menjalankan baris kode yang telah Anda tulis? Anda dapat melakukan evaluasi atau eksekusi baris kode yang terdapat di dalam *chunk* dengan cara menekan "Ctrl + Enter" atau "Ctrl + Shift + Enter". Dapatkan Anda menebak perbedaan antara dua kombinasi kibor tersebut?
+
+R Markdown dapat disebut sebagai dokumen perantara untuk memproduksi dokumen final. Anda dapat dengan mudah memproduksi dokumen final dengan berbagai format dengan menggunakan R Markdown, misalnya dokumen teks biasa, salindia presentasi, laman web, dan bahkan aplikasi web interaktif. Beberapa ekstensi dokumen keluaran yang dapat dihasilkan diantaranya html, md, pdf, docx, odt, dan tex. Sebagai contoh pada modul-modul pelatihan ini kita akan memproduksi dokune final berupa "Github Flavoured Markdown" dengan ekstensi md.
+
+Kemudian bagaimana cara mengatur dan memproduksi dokumen final tersebut? Caranya adalah dengan mengatur metadata pada dokumen R Markdown, khususnya pada baris `output: ...` (perhatikan kode pada baris-baris awal dokumen R Markdown ini!). Apabila Anda ingin menghasilkan dokumen final berupa docx, maka cukup ubah kode `output: github_document` menjadi `output: word_document`. Terakhir, Anda dapat memproduksi dokumen final dengan cara klik tombol "Knit" atau kombinasi "Ctrl + Shift + K". Dokumen final yang dihasilkan akan berisi teks narasi, kode pemrograman, dan keluaran dari kode pemrograman tersebut. Silakan coba setelah Anda mengisi dan menjawab seluruh pertanyaan dalam modul pertama ini.
 
 ## Struktur data
-Struktur data pada R dapat dikategorikan berdasarkan dimensi dan homogenitas dari elemen. Data satu dimensi dengan elemen yang homogen disebut sebagai *atomic vector*, sedangkan jika heterogen disebut sebagai *list*. Cara untuk membuat *atomic vectors* adalah dengan menggunakan fungsi `c()`, sedangkan untuk *list* dapat dibuat dengan menggunakan fungsi `list()`. Salah satu cara untuk memberikan nama pada objek data adalah dengan menggunakan tanda `<-`. Perhatikan contoh berikut:
+
+Jalankanlah kode dalam *chunk* berikut:
+```{r}
+"Halo, nama saya adalah ..." # isi dengan nama Anda
+```
+
+Saat Anda menjalankan *chunk* di atas, R akan mengevaluasi dan melakukan eksekusi pada baris kode yang dituliskan. Dalam contoh di atas, keluaran dari eksekusi baris kode adalah kalimat "Halo, nama saya adalah (nama Anda)" yang tercetak di dokumen R Markdown atau konsol RStudio. Mengapa kalimat "# isi dengan nama Anda" tidak ikut tercetak?
+
+Sekarang jalankanlah baris kode berikut:
+```{r}
+123
+```
+
+Hasil eksekusi kode di atas pada dasarnya adalah obyek berupa *vector*. *Vector* merupakan struktur data paling mendasar di bahasa pemrograman R. Terdapat tiga properti utama dari suatu *vector*, yaitu: *type*, *length*, dan *attribute*. Pada contoh kode sederhana di atas, obyek yang dihasilkan memiliki *type* berupa "double", *length* bernilai satu, dan *attribute* bernilai "NULL".
+
+Struktur obyek dalam bahasa pemrograman R dapat dikategorikan berdasarkan dimensi dan homogenitas dari elemennya. Obyek dengan satu dimensi dan elemen yang homogen disebut sebagai *atomic vector*, sedangkan apabila elemennya heterogen maka disebut dengan *list*. Cara untuk membuat *atomic vector* adalah dengan elemen lebih dari satu adalah dengan menggunakan fungsi `c()`, sedangkan untuk *list* dengan menggunakan fungsi `list()`. Perhatikan contoh berikut:
 
 ```{r}
 c(1, 2, 3, 4)
 c("r", "academy", "telkom", "university")
 list(15, "r", "TRUE", 24L)
-
-huruf_vokal <- c("a", "i", "u", "e", "o") # objek data tersimpan dengan nama 'huruf_vokal', namun tidak tercetak pada konsol
-huruf_vokal # mencetak objek data dengan nama 'huruf_vokal' pada konsol
 ```
 
-Jenis dari data dapat diketahui dengan menggunakan fungsi `typeof()`. Dapatkah Anda mengetahui jenis data dari 'huruf_vokal' diatas? Bagaimana jika Anda membuat objek data dengan menggunakan fungsi `c()` namun jenis elemennya berbeda-beda? Dapatkah Anda menjelaskannya? Isilah '___' dengan jawaban yang sesuai!
+Saat Anda mengeksekusi *chunk* di atas, keluaran dari kode yang Anda eksekusi hanya tercetak pada layar. Anda dapat "menyimpan" keluaran dari kode menjadi sebuah obyek R dengan menggunakan tanda `<-` dengan format "nama_obyek <- kode_yang_dieksekusi". Buatlah *vector* berupa huruf-huruf vokal dan simpanlah hasilnya dalam obyek R dengan nama `huruf_vokal`! Isilah "___" dengan jawaban yang sesuai!
 
 ```{r}
-___(huruf_vokal)
-
-beragam <- c(2.7, "berbeda", TRUE, 4L) # 2.7 bertipe double, "berbeda" bertipe character, TRUE bertipe logical, 4L bertipe integer
-typeof(___) # cek tipe dari objek data dengan nama 'beragam'
+huruf_vokal <- c("a", "i", "u", "e", "o") # objek data tersimpan dengan nama 'huruf_vokal', namun tidak tercetak pada layar
+huruf_vokal # mencetak objek data dengan nama 'huruf_vokal' pada layar (Anda juga dapat menuliskannya sebagai "print(huruf_vokal)")
 ```
 
-Struktur data dua dimensi merupakan yang paling banyak digunakan di R, yaitu matrix dan dataframe yang dapat dibuat dengan menggunakan fungsi `matrix()` dan `data.frame()`. Kedua data tersebut umumnya jarang dibuat secara langsung di R, notabene berasal dari berkas luar atau merupakan hasil dari penggunaan fungsi. Prinsipnya suatu dataframe merupakan gabungan dari beberapa data satu dimensi dengan jumlah yang sama, umumnya adalah *atomic vectors*. Menurut Anda, dapatkah suatu frame tersusun atas beberapa *list* dengan jumlah yang sama?
+Properti *type* dari *vector* dapat diketahui dengan menggunakan fungsi `typeof()`. Dapatkah Anda mengetahui *type* dari 'huruf_vokal' diatas? Bagaimana jika Anda membuat objek data dengan menggunakan fungsi `c()` namun jenis elemennya berbeda-beda? Dapatkah Anda menjelaskannya?
 
-## Operator
+```{r}
+typeof(huruf_vokal)
+
+beragam <- c(2.7, "berbeda", TRUE, 4L) # 2.7 bertipe double, "berbeda" bertipe character, TRUE bertipe logical, 4L bertipe integer
+typeof(beragam) # cek tipe dari objek data dengan nama 'beragam'
+```
+
+Struktur obyek dua dimensi merupakan yang paling banyak digunakan di R, yaitu matrix dan dataframe yang dapat dibuat dengan menggunakan fungsi `matrix()` dan `data.frame()`. Kedua data tersebut umumnya jarang dibuat secara langsung di R, notabene berasal dari berkas luar atau merupakan hasil dari penggunaan fungsi. Prinsipnya suatu dataframe merupakan gabungan dari beberapa data satu dimensi dengan jumlah yang sama, umumnya adalah *atomic vectors*. Menurut Anda, dapatkah suatu frame tersusun atas beberapa *list* dengan jumlah yang sama?
+
+## Operasi aritmatika
+
+Anda dapat menggunakan simbol-simbol matematika pada umumnya untuk melakukan operasi matematika. Perhatikan contoh berikut:
+
+```{r}
+5 + 6
+580 - 13
+75 * 65
+983/56
+54^3
+27 %% 5
+27 %/% 3
+```
+
+Sekarang cobalah lakukan operasi artimatika sama seperti pada *chunk* di atas untuk dua *numeric vectors* x dan y berikut. Apakah hasil yang Anda temukan? Apa yang terjadi jika *length* antar dua *vector* tersebut berbeda?
+
+```{r}
+x <- c(34, 86, 98, 23, 66)
+y <- c(5, 6, 2, 8, 4)
+x + y
+x - y
+x * y
+x / y
+x ^ y
+x %% y
+x %/% y
+```
+
 
 ## Fungsi
-Fungsi memiliki tugas utama untuk mengolah suatu *input* menjadi *output*. Anda dapat melihat dan membaca dokumentasi dari suatu fungsi dengan menjalankan `?nama_fungsi` atau `help(nama_fungsi)`. Di bawah ini merupakan beberapa fungsi dasar yang dapat Anda gunakan untuk mengolah objek data dengan nama 'iris' sebagai *input*. Buatlah catatan singkat mengenai kegunaan dari setiap fungsi yang digunakan!
-
+Fungsi memiliki tugas utama untuk mengolah suatu *input* menjadi *output*. Anda dapat melihat dan membaca dokumentasi dari suatu fungsi dengan menjalankan `?nama_fungsi` atau `help(nama_fungsi)`. Di bawah ini merupakan beberapa fungsi dasar yang dapat Anda gunakan untuk mengolah obyek bernama `iris` sebagai *input*. Buatlah catatan singkat mengenai kegunaan dari setiap fungsi yang digunakan!
 
 ```{r}
 iris # mencetak data di konsol
+?iris # ___
 dim(iris) # ___
 str(iris) # ___
 colnames(iris) # ___
@@ -99,6 +159,4 @@ write.csv(iris, file = "iris.csv", row.names = FALSE) # ___
 
 Dari catatan ringkas mengenai fungsi-fungsi di atas, dapatkah Anda menebak mana fungsi yang berjenis '*changing the environment*' dan mana yang berjenis '*calculating value*'?
 
-## Paket
-
-## RStudio Project
+> Selamat Anda telah menyelesaikan modul 1! Silakan jalankan "Ctrl + Shift + K" atau klik tombol "Knit" untuk membuat dokumen final.
