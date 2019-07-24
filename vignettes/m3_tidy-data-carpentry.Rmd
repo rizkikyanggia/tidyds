@@ -1,8 +1,6 @@
 ---
 title: "Into tidy data and data carpentry"
-output: 
-  github_document:
-    df_print: "tibble"
+output: github_document
 ---
 
 ```{r, include = FALSE}
@@ -12,3 +10,211 @@ knitr::opts_chunk$set(
 )
 ```
 <!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
+
+> Dalam modul ini Anda akan diajak untuk memahami konsep tidy data dan melakukan proses transformasi data.
+
+## Tidy data
+
+"Tidy data" adalah konsep representasi data agar dapat lebih mudah dipahami dan diolah. Selain itu, tidy data adalah format umum yang digunakan oleh paket-paket tidyverse, sehingga antar paket dapat terintegasi dengan baik dalam mengolah suatu data.
+
+Dalam modul ini kita akan menggunakan dataset yang tersedia dari paket `tidyr` untuk memahami konsep tidy data. Silakan aktifkan paket tersebut terlebih dahulu!
+
+```{r}
+library(tidyr)
+```
+
+Anda diminta untuk melakukan identifikasi karakteristik dari dataset-dataset yang tersedia, yaitu `table1`, `table2`, `table3`, `table4a`, `table4b`, dan `table5`. Cetaklah dataset tersebut pada layar dan berikan komentar Anda serta diagnosa Anda! Manakah yang termasuk tidy data dan manakah yang tidak termasuk tidy data?
+
+```{r}
+table1
+```
+
+`table1` termasuk/tidak termasuk "Tidy data" karena ...
+
+```{r}
+table2
+```
+
+`table2` termasuk/tidak termasuk "Tidy data" karena ...
+
+```{r}
+table3
+```
+
+`table3` termasuk/tidak termasuk "Tidy data" karena ...
+
+
+```{r}
+table4a
+```
+
+`table4a` termasuk/tidak termasuk "Tidy data" karena ...
+
+```{r}
+table4b
+```
+
+`table4b` termasuk/tidak termasuk "Tidy data" karena ...
+
+```{r}
+table5
+```
+
+`table5` termasuk/tidak termasuk "Tidy data" karena ...
+
+## Mempersiapkan tidy data
+
+Setelah berhasil melakukan identifikasi mana tidy data dan mana yang bukan merupakan tidy data, sekarang Anda akan melakukan perbaikan pada dataset sehingga menjadi tidy data. Kita akan banyak menggunakan fungsi `spread()` dan `gather()` yang berasal dari paket `tidyr`. Pelajarilah kedua paket tersebut dengan membuka dokumentasi! (Petunjuk: `?nama_fungsi`)
+
+```{r}
+?spread
+?gather
+```
+
+Sebagai contoh pertama, kita akan memperbaiki `table2` sehingga menjadi tidy data. Cetaklah data tersebut pada layar untuk kembali mengingat alasan mengapa data tersebut tidak termasuk tidy data!
+
+```{r}
+table2
+```
+
+Kasus seperti pada `table2` tersebut dapat ditangani dengan cara memanfaatkan fungsi `spread()` seperti contoh yang akan diberikan pada *chunk* berikut. Dapatkah Anda menjelaskan mengapa fungsi `spread()` bermanfaat untuk kasus tersebut?
+
+```{r}
+table2_tidy <- spread(table2, key = "type", value = "count")
+table2_tidy
+```
+
+Selanjutnya kita akan menangani `table4a`. Masih ingatkah Anda mengapa `table4a` tidak termasuk dalam kategori tidak tidy data? Cetaklah data tersebut pada layar!
+
+```{r}
+table4a
+```
+
+Kasus seperti pada `table4a` tersebut dapat diselesaikan dengan menggunakan fungsi `gather()`. Dapatkah Anda menyebutkan alasannya? Perhatikan contoh berikut:
+
+```{r}
+table4a_tidy <- gather(table4a, key = "year", value = "cases", 2:3)
+table4a_tidy
+```
+
+Sekarang Anda dipersilakan untuk melakukan perbaikan serupa pada `table4b` namun gunakanlah "population" untuk argumen `value`. Cetaklah `table4b` terlebih dahulu dan kemudian simpan hasil perbaikan Anda dalam obyek R bernama `table4b_tidy`. Jangan lupa untuk mencetak `table4b_tidy` pada layar!
+
+```{r}
+table4b
+table4b_tidy <- gather(table4b, key = "year", value = "population", -country)
+table4b_tidy
+```
+
+Perhatikan kode perbaikan untuk `table4a` dan `table4b`. Apakah ada perbedaaan yang Anda amati? Jika iya, mengapa pada keduanya perbaikan tetap dapat berhasil dilakukan?
+
+Sekarang cobalah Anda cetak kembali `table1` pada layar serta buatlah perbandingan dengan `table4a_tidy` dan `table4b_tidy`. Apa yang dapat Anda amati?
+
+```{r}
+table1
+table4a_tidy
+table4b_tidy
+```
+
+Ya! Apabila `table4a_tidy` dan `table4b_tidy` digabungkan maka hasilnya akan menjadi `table1`. Dapatkah Anda menggabungkan `table4a_tidy` dan `table4b_tidy` tersebut menjadi satu? Simpanlah hasil penggabungan tersebut dalam obyek R bernama `tb_small` dan cetak hasilnya pada layar! (Petunjuk: fungsi `merge()`)
+
+```{r}
+tb_small <- merge(table4a_tidy, table4b_tidy)
+tb_small
+```
+
+Selamat Anda telah berhasil memperbaiki data sehingga menjadi tidy data!
+
+## Transformasi data
+
+Anda telah sukses membuat `tb_small` dengan menggunakan beberapa kombinasi fungsi (`spread()`, `gather()`, dan `merge()`). Perlu Anda ketahui `tb_small` atau `table1` tersebut merupakan sebagian kecil dari data `who` dan `population`. Kedua data tersebut berasal dari paket `tidyr`. Anda dapat membaca dokumentasi kedua data tersebut dengan cara menjalankan `?who` dan `?population`. Apakah informasi yang terkandung dalam dua data tersebut?
+
+Sekarang cetaklah data `who` dan `population` pada layar!
+
+**Data`who`**
+
+```{r}
+who
+```
+
+**Data `population`**
+
+```{r}
+population
+```
+
+Daripada mencetak keseluruhan data pada layar, Anda dapat menggunakan alternatif mencetak ringkasan atau struktur data saja. Lakukanlah hal tersebut pada `who` dan `population`! (Petunjuk: modul 2)
+
+**Struktur data `who`**
+
+```{r}
+str(who)
+```
+
+**Struktur data `population`**
+
+```{r}
+str(population)
+```
+
+Sekarang kita akan membuat versi utuh dan lengkap dari `tb_small`. Data yang akan kita buat akan mencakup lebih banyak negara dan rentang waktu pengamatan yang lebih panjang. Paket `dplyr` merupakan "perkakas" yang sangat handal digunakan untuk mencapai tujuan tersebut. Aktifkanlah paket tersebut terlebih dahulu!
+
+```{r}
+library(dplyr)
+```
+
+Sangat banyak fungsi yang terdapat pada paket `dplyr`, namun ada enam fungsi utama yang wajib Anda kuasai yaitu: `select()`, `filter()`, `arrange()`, `mutate()`, `group_by()`, dan `summarise()`. Silakan pelajari fungsi-fungsi tersebut dengan membaca dokumentasinya.
+
+Dalam mempersiapkan versi utuh dari `tb_small` kita akan menggunakan beberapa kombinasi fungsi yang akan dijalankan secara berurutan. Pada contoh di modul ini Anda akan menggunakan dua jenis pendekatan untuk menuliskan fungsi berantai serta kemudian menyimpan hasilnya pada obyek masing-masing bernama `tb_full_a` dan `tb_full_b`.
+
+**Cara pertama:**
+
+```{r}
+tb1 <- gather(who, key = "key", value = "case", new_sp_m014:newrel_f65)
+tb2 <- select(tb1, country, year, case)
+tb3 <- group_by(tb2, country, year)
+tb4 <- summarise(tb3, cases = sum(case, na.rm = TRUE))
+tb5 <- ungroup(tb4)
+tb6 <- left_join(tb5, population)
+tb7 <- filter(tb6, !is.na(population))
+tb_full_a <- mutate(tb7, proportion = 100*cases/population)
+
+tb_full_a
+```
+
+**Cara kedua:**
+
+```{r}
+tb_full_b <- 
+  who %>% 
+  gather(key = "key", value = "case", new_sp_m014:newrel_f65) %>% 
+  select(country, year, case) %>% 
+  group_by(country, year) %>% 
+  summarise(cases = sum(case, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  left_join(population) %>% 
+  filter(!is.na(population)) %>% 
+  mutate(proportion = 100*cases/population)
+
+tb_full_b
+```
+
+Buatlah ringkasan apa saja hal yang dilakukan pada setiap tahap transformasi data diatas! Anda dapat membuat ringkasan baik berdasarkan cara pertama atau cara kedua.
+
+1. Dataset `who` berisi data jumlah kasus TBC per negara dan tahun. Dataset tersebut tidak *tidy* karena kolom new_sp_m014 hingga newrel_f65 pada dataset `who` mengandung informasi yang sama yaitu data observasi jumlah kasus. Data observasi tersebut harus diubah menjadi baris agar membuatnya menjadi *tidy data*. Fungsi `gather()` digunakan untuk mengubah kolom new_sp_m014 hingga newrel_f65 menjadi baris. Judul kolom new_sp_m014 hingga newrel_f65 kemudian disimpan ke dalam kolom baru dengan nama '*year*' serta nilai-nilai pada semua kolom tersebut disimpan pada kolom baru dengan nama '*case*'
+2. Memilih kolom '*country*', '*year*', dan '*case*'
+3. Membuat *grouping* berdasarkan '*country*' dan '*year*'
+4. Menghitung jumlah total kasus berdasarkan *grouping* '*country*' dan '*year*'
+5. Menghilangkan *grouping*
+6. Menggabungkan dataset `population` dengan menggunakan kolom '*country*' dan '*year*' sebagai indeks
+7. Melakukan seleksi baris dengan cara menghapus baris jika ditemukan nilai `NA` pada kolom '*pupulation*'
+8. Menambahkan kolom baru dengan nama '*proportion*' dengan rumus '100 x cases/population'
+
+Berikan komentar Anda pada dua jenis cara penulisan kode di atas! Menurut Anda cara penulisan manakah yang lebih mudah dilakukan dan dipahami?
+
+Silakan periksa apakah `tb_full_a` dan `tb_full_b` identik satu sama lain dengan menggunkan fungsi `identical()`!
+
+```{r}
+identical(tb_full_a, tb_full_b)
+```
+
+> Selamat Anda telah menyelesaikan modul 3! Silakan jalankan "Ctrl + Shift + K" atau klik tombol "Knit" untuk membuat dokumen final.

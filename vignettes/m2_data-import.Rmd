@@ -77,6 +77,7 @@ Di R terdapat berbagai fungsi dan paket yang dapat digunakan untuk membaca dan m
 Mengapa ada banyak fungsi dan paket berbeda untuk tujuan yang sama? Hal utama yang menjadi dasar perbedaan adalah konsistensi, kemudahan penggunaan fungsi bagi pengguna, dan kecepatan dalam membaca berkas (Anda dapat membaca perbandingan kecepatan antar paket pada tautan [ini](https://vroom.r-lib.org/articles/benchmarks.html)). Berdasarkan pertimbangan dari aspek-aspek tersebut, dalam pelatihan ini kita akan fokus menggunakan paket `vroom` untuk mengimpor berkas *delimited*.
 
 Aktifkanlah paket `vroom` dan bacalah dokumentasi fungsi `vroom()`!
+
 ```{r}
 library(vroom)
 help(vroom)

@@ -61,3 +61,26 @@ udara_bandung_raw %>%
 # Dirty excel file (from janitor) -----------------------------------------
 
 download.file("https://github.com/sfirke/janitor/raw/master/dirty_data.xlsx", here("data-raw", "roster.xlsx"))
+
+
+# UN SMP Kota Bandung -----------------------------------------------------
+
+un_smp_raw <- cari("UN SMP") %>%
+  impor()
+
+un_smp <-
+  un_smp_raw %>%
+  bind_rows(.id = "id") %>%
+  transmute(
+    tahun = str_extract(id, "\\d{4}"),
+    status = if_else(str_detect(id, "Swasta"), "Swasta", "Negeri"),
+    nama_sekolah = coalesce(nama_satuan_pendidikan, nama_satuan),
+    jumlah_peserta = jumlah_peserta,
+    bahasa_indonesia = bahasa_indonesia,
+    bahasa_inggris = bahasa_inggris,
+    matematika = matematika,
+    ipa = ipa
+  )
+
+un_smp %>%
+  write_csv(here("data-raw", "un_smp.csv"))
