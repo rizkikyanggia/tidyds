@@ -13,11 +13,11 @@ knitr::opts_chunk$set(
 ```
 <!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
 
-Aktivitas analisis data seringkali dilakukan dengan menggunakan data yang dihasilkan oleh program lain. Dalam modul ini Anda akan belajar bagaimana cara melakukan impor data kedalam R untuk selanjutnya melakukan manipulasi, visualisasi, atau pemodelan.
+> Aktivitas analisis data seringkali dilakukan dengan menggunakan data yang dihasilkan oleh program lain. Dalam modul ini Anda akan belajar bagaimana cara melakukan impor data kedalam R untuk selanjutnya melakukan manipulasi, visualisasi, atau pemodelan.
 
 ## Alamat berkas
 
-Tahap terpenting sebelum Anda melakukan impor data adalah menentukan alamat dimana berkas atau dokumen yang akan diimpor disimpan. Praktek terbaik pertama adalah menyimpan berkas data, skrip analisis, dan keluaran analisis di dalam satu direktori utama serta membaginya ke dalam beberapa subdirektori. Sebagai contoh, dalam pelatihan ini semua material disimpan dalam satu direktori `tidyds` yang sekaligus merupakan RStudio Project (ditandai dengan adanya berkas `tidyds.Rproj`). Praktek terbaik kedua adalah menuliskan alamat berkas atau dokumen relatif terhadap direktori utama (tempat berkas `*.Rproj` tersimpan). Hindari menulis alamat berkas relatif terhadap alamat *hardisk*, contohnya "C:/Documents/.." atau "/home/aswansyahputra/Documents".
+Tahap terpenting sebelum Anda melakukan impor data adalah menentukan alamat dimana berkas atau dokumen yang akan diimpor disimpan. Praktek terbaik pertama adalah menyimpan berkas data, skrip analisis, dan keluaran analisis di dalam satu direktori utama serta membaginya ke dalam beberapa subdirektori. Sebagai contoh, dalam pelatihan ini semua material disimpan dalam satu direktori "tidyds". Praktek terbaik kedua adalah menuliskan alamat berkas atau dokumen relatif terhadap direktori utama. Hindari menulis alamat berkas relatif terhadap alamat *hardisk*, contohnya "C:/Documents/.." atau "/home/aswansyahputra/Documents".
 
 Dalam pelatihan ini Anda akan menggunakan paket `here` untuk menentukan dan menuliskan alamat berkas atau dokumen. Aktifkanlah paket `here` terlebih dahulu dengan menjalankan `library(nama_paket)`!
 
@@ -31,7 +31,7 @@ Kemudian periksalah alamat direktori utama berada dengan cara menjalankan fungsi
 dr_here()
 ```
 
-Anda juga dapat menggunakan fungsi `here()` untuk mendapatkan alamat direktori utama, cobalah! Selanjutnya bagaimana cara untuk menuliskan alamat suatu berkas atau dokumen dengan cara menggunakan fungsi `here()`? Dalam contoh berikut Anda dapat menentukan alamat dari berkas 'udara_bandung.xlsx' yang tersimpan dalam subdirektori `data-raw`.
+Anda juga dapat menggunakan fungsi `here()` untuk mendapatkan alamat direktori utama, cobalah! Selanjutnya bagaimana cara untuk menuliskan alamat suatu berkas atau dokumen dengan cara menggunakan fungsi `here()`? Dalam contoh berikut Anda dapat menentukan alamat dari berkas 'udara_bandung.xlsx' yang tersimpan dalam subdirektori "data-raw".
 
 ```{r}
 here() # dimanakah alamat direktori utama/Project berada?
@@ -84,7 +84,7 @@ library(vroom)
 help(vroom)
 ```
 
-Sekarang cobalah impor berkas "anggaran-dinkes-2013.csv" yang berada dalam sudirektori `data-raw` dengan menggunakan fungsi `vroom()` dan simpanlah sebagai obyek R dengan nama `dinkes_2013_vroom`! Kemudian lakukanlah inspeksi terhadap `dinkes_2013_vroom` tersebut. Ada berapa observasi dan variabel? Apa saja nama dan tipe dari setiap variabel data tersebut? (Petunjuk: fungsi `str()` serta `summary()`)
+Sekarang cobalah impor berkas "anggaran-dinkes-2013.csv" yang berada dalam subdirektori "data-raw" dengan menggunakan fungsi `vroom()` dan simpanlah sebagai obyek R dengan nama `dinkes_2013_vroom`! Kemudian lakukanlah inspeksi terhadap `dinkes_2013_vroom` tersebut. Ada berapa observasi dan variabel? Apa saja nama dan tipe dari setiap variabel data tersebut? (Petunjuk: fungsi `str()` serta `summary()`)
 
 ```{r}
 dinkes_2013_vroom <- vroom(here("data-raw", "anggaran-dinkes-2013.csv"))
@@ -107,14 +107,12 @@ class(dinkes_2013_vroom)
 class(dinkes_2013_utils)
 ```
 
-Terakhir lakukanlah perbandingan antara jenis data pada kolom `program` dari masing-masing dataset tersebut! Anda dapat mengekstrak kolom dari suatu *dataframe* menggunakan operator `$` dengan format `nama_obyek$nama_kolom`. Gunakanlah fungsi `class()` seperti di atas! (Petunjuk: `stringsAsFactors = TRUE`)
+Terakhir lakukanlah perbandingan antara jenis data pada kolom "program" dari masing-masing dataset tersebut! Anda dapat mengekstrak kolom dari suatu *dataframe* menggunakan operator `$` dengan format `nama_tabel$nama_kolom`. Gunakanlah fungsi `class()` seperti di atas! (Petunjuk: `stringsAsFactors = TRUE`)
 
 ```{r}
 class(dinkes_2013_vroom$program)
 class(dinkes_2013_utils$program)
 ```
-
-
 
 ## Impor banyak berkas *delimited*
 
@@ -161,4 +159,49 @@ identical(anggaran_dinkes_forloop, anggaran_dinkes_vroom)
 identical(anggaran_dinkes_lapply, anggaran_dinkes_vroom)
 ```
 
-## Memecahkan permasalahan umum data
+## Menjinakan data
+
+Bukalah berkas "roster.xlsx" yang berada dalam subdirektori "data-raw" menggunakan Microsoft Excel atau perkakas perkantoran sejenis. Dapatkah Anda memperkirakan masalah apa yang ada dalam berkas tersebut jika nanti diimpor ke R?
+
+Sekarang imporlah data "roster.xlsx" tersebut dan simpanlah ke dalam obyek R bernama `roster_raw1`. Apakah ada pesan yang muncul? Pelajarilah struktur `roster_raw1` dengan menggunakan fungsi inspeksi data yang sebelumnya Anda pergunakan di atas.
+
+```{r}
+roster_raw1 <- read_excel(here("data-raw", "roster.xlsx"))
+str(roster_raw1)
+```
+
+Cobalah Anda ekstrak (*subset*) kolom "Employee Status" dan kolom "% Allocated" dengan menggunakan operator `$`! Perhatikan kode yang Anda tulis. (Petunjuk: `nama_tabel$nama_kolom`)
+
+```{r}
+roster_raw1$`Employee Status`
+roster_raw1$`% Allocated`
+```
+
+Jika Anda perhatikan, pada nama kolom yang Anda tulis secara otomatis oleh RStudio akan ditambahkan dua tanda *backtics* di awal dan akhir. Cobalah Anda hapus tanda tersebut dan jalankan ulang baris kode di atas. Dapatkah Anda menjelaskan apa yang terjadi? (Petunjuk: `?make.names`)
+
+Anda dapat menyelesaikan permasalahan di atas dengan menggunakan paket `janitor`. Sebagai contoh kita akan mengimpor ulang "roster.xlss" menjadi obyek R bernama `roster_raw`. Ada dua cara yang dapat dilakukan, berikut merupakan cara pertama:
+
+```{r}
+library(janitor)
+roster_raw <- read_excel(here("data-raw", "roster.xlsx"), .name_repair = make_clean_names) # make_clean_names() adalah fungsi dari paket janitor
+colnames(roster_raw)
+```
+
+Sedangkan cara kedua adalah sebagai berikut:
+```{r}
+roster_raw <- read_excel(here("data-raw", "roster.xlsx"))
+roster_raw <- clean_names(roster_raw)
+colnames(roster_raw)
+```
+
+Hal apakah yang menjadi perbedaan antara dua cara di atas? Apakah cara pertama dapat digunakan untuk fungsi `vroom()` dan `read.csv()`? (Petunjuk: dokumentasi masing-masing fungsi)
+
+`roster_raw` memiliki masalah lain yaitu adanya baris kosong (baris no 8) dan kolom kosong (kolom "do_not_edit"). Selain itu kolom "date_hire" yang seharusnya berjenis tanggal justru menjadi berjenis numerik (konversi tanggal menjadi numerik ini sering terjadi pada berkas Excel). Baris kode berikut merupakan salah satu cara untuk memperbaiki `roster_raw` agar menjadi "jinak". Bacalah dokumentasi dari setiap fungsi yang digunakan!
+
+```{r}
+roster <- remove_empty(roster_raw, which = c("rows", "cols"))
+roster$hire_date <- excel_numeric_to_date(roster$hire_date)
+roster
+```
+
+> Selamat Anda telah menyelesaikan modul 2! Silakan jalankan "Ctrl + Shift + K" atau klik tombol "Knit" untuk membuat dokumen final.
