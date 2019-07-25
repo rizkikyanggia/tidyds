@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 ## R Markdown
 
-Bgaimana jika ada satu format dokumen yang dapat menggabungkan antara narasi, kode pemrograman, dan keluaran dari kode tersebut dalam satu wadah sekaligus? R Markdown adalah jawabannya! Melalui dokumen R Markdown Anda dapat menuliskan kode analisis data, mengeksekusi kode tersebut, dan memberikan teks interpretasi untuk analisis data tersebut. Jika Anda pernah mendengar atau menggunakan Jupyter Notebook, maka R Markdown adalah ekuivalen untuk format dokumen tersebut. Informasi lebih lanjut mengenai R Markdown dapat dilihat pada pranala [ini](http://rmarkdown.rstudio.com).
+Bagaimana jika ada satu format dokumen yang dapat menggabungkan antara narasi, kode pemrograman, dan keluaran dari kode tersebut dalam satu wadah sekaligus? R Markdown adalah jawabannya! Melalui dokumen R Markdown Anda dapat menuliskan kode analisis data, mengeksekusi kode tersebut, dan memberikan teks interpretasi untuk analisis data tersebut. Jika Anda pernah mendengar atau menggunakan Jupyter Notebook, maka R Markdown adalah ekuivalen untuk format dokumen tersebut. Informasi lebih lanjut mengenai R Markdown dapat dilihat pada pranala [ini](http://rmarkdown.rstudio.com).
 
 Di dokumen R Markdown Anda dapat melakukan pengaturan teks dengan menggunakan Markdown. Silakan klik menu "Help -- Markdown Quick Reference" untuk melihat sontekan cara pengaturan teks menggunakan Markdown langsung dari RStudio. Buatlah penomoran (*numbering*) dan pengaturan untuk teks di bawah ini:
 
@@ -29,8 +29,7 @@ Seperti disebutkan sebelumnya bahwa Anda juga dapat menuliskan kode pemrograman 
 tulis kode pemrograman
 pada bagian ini
 ```
-
-Selanjutnya untuk menegaskan bahasa pemrograman apa yang digunakan dan akan dieksekusidalam suatu *chunk*, Anda dapat menambahkan penanda "{bahasa_pemrograman}" tepat setelah penanda *backtics* di awal *chunk*. R Markdown mendukung dan dapat mengeksekusi beberapa jenis bahasa pemrograman selain R, misalnya Python, SQL, dan Bash. Dalam contoh berikut menunjukan penggunaan bahasa pemrograman R di dalam suatu *chunk*:
+Selanjutnya untuk menegaskan bahasa pemrograman apa yang digunakan dan akan dieksekusidalam suatu *chunk*, Anda dapat menambahkan penanda "{bahasa_pemrograman}" tepat setelah penanda *backtics* di awal *chunk*. R Markdown mendukung dan dapat mengeksekusi beberapa jenis bahasa pemrograman selain R, misalnya Python, Julia, C, Fortran, SQL, dan Shell script. Dalam contoh berikut menunjukan penggunaan bahasa pemrograman R di dalam suatu *chunk*:
 
 ```{r}
 head(mtcars) # melihat 6 baris pertama dari data mtcars, mtcars adalah data bawaan yang tersedia di R
@@ -172,5 +171,19 @@ write.csv(iris, file = "iris.csv", row.names = FALSE) # menyimpan iris menjadi b
 ```
 
 Dari catatan ringkas mengenai fungsi-fungsi di atas, dapatkah Anda menebak mana fungsi yang berjenis '*changing the environment*' dan mana yang berjenis '*calculating value*'?
+
+# Paket
+
+Meskipun R telah memiliki banyak fungsi bawaan dan sangat bermanfaat, tidak jarang Anda memerlukan fungsionalitas lain yang tidak tersedia di R. Di bahasa pemrograman R terdapat sistem ekstensi yang disebut sebagai paket. Anda dapat melakukan banyak hal dan berbagai tujuan dengan cara memasang paket yang sesuai. Terdapat berbagai sumber repositori tempat paket-paket tersebut tersimpan secara daring, diantaranya adalah CRAN (Comprehensive R Archive Network), GitHub, dan Bioconductor.
+
+Anda dapat memasang paket yang berasal dari CRAN dengan menggunakan fungsi `install.packages("nama_paket")`. Pada RStudio Anda juga dapat melakukan hal tersebut melalui menu "Tools-Install Packages". Sekarang cobalah pasang paket "tidyverse", "tidymodels", dan "tidytext"! (Catatan: jika Anda menuliskan fungsi untuk memasang paket di dalam *chunk* R Markdown maka jangan lupa tambahkan argumen `eval = FALSE` di awal *chunk*)
+
+```{r, eval = FALSE}
+install.packages("tidyverse")
+install.packages("tidymodels")
+install.packages("tidytext)
+```
+
+Sedangkan untuk paket yang berasal dari GitHub dan Bioconductor dapat dipasang menggunakan fungsi `remotes::install_github("user/repo")` serta `remotes::install_bioc("repo")`. (Catatan: Anda harus memasang paket `remotes` terlebih dahulu)
 
 > Selamat Anda telah menyelesaikan modul 1! Silakan jalankan "Ctrl + Shift + K" atau klik tombol "Knit" untuk membuat dokumen final.

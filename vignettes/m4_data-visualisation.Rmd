@@ -153,7 +153,7 @@ mtk_vs_ind <- ggplot(un_smp, aes(x = bahasa_indonesia, y = matematika)) +
     colour = "Status sekolah",
     size = "# peserta",
     title = "Bagaimana hubungan antar nilai ujian nasional?",
-    subtitle = "Nilai Ujian Nasional SMP di Kota Bandung 2015-2019",
+    subtitle = "Ujian Nasional SMP di Kota Bandung 2015-2019",
     caption = "Sumber: Open Data Kota Bandung"
   ) +
   theme_light()
