@@ -9,6 +9,8 @@ install.packages("tidyverse")
 library(bandungjuara)
 library(here)
 library(tidyverse)
+library(tidytext)
+library(gutenbergr)
 
 # Anggaran Dinas Kesehatan Kota Bandung -----------------------------------
 
@@ -84,3 +86,72 @@ un_smp <-
 
 un_smp %>%
   write_csv(here("data-raw", "un_smp.csv"))
+
+# Sherlock Holmes ---------------------------------------------------------
+sherlock_raw <- gutenberg_download(1661)
+
+sherlock <- sherlock_raw %>%
+  mutate(
+    story = if_else(str_detect(text, "ADVENTURE"),
+                    text,
+                    NA_character_),
+    story = str_remove_all(story, "^ADVENTURE "),
+    text = na_if(text, "")
+  ) %>%
+  fill(story) %>%
+  filter(story != "THE ADVENTURES OF SHERLOCK HOLMES") %>%
+  select(story, text)
+
+sherlock %>%
+  write_csv(here("data-raw", "sherlock.csv"))
+
+
+tidy_sherlock <- sherlock %>%
+  group_by(story) %>%
+  unnest_tokens(word, text) %>%
+  ungroup() %>%
+  anti_join(stop_words) %>%
+  count(story, word, sort = TRUE)
+
+sherlock_dtm <- tidy_sherlock %>%
+  cast_dtm(story, word, n)
+
+sherlock_dtm
+
+sherlock_lda <- LDA(sherlock_dtm, k = 6)
+
+sherlock_lda %>%
+  tidy() %>%
+  group_by(topic) %>%
+  top_n(10, beta) %>%
+  ungroup() %>%
+  mutate(topic = paste0("Topic ", topic),
+         term = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(term, beta, fill = as.factor(topic))) +
+  geom_col(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free_y") +
+  coord_flip() +
+  scale_x_reordered() +
+  labs(x = NULL, y = expression(beta),
+       title = "Highest word probabilities for each topic",
+       subtitle = "Different words are associated with different topics")
+
+sherlock_lda %>%
+  tidy(matrix = "gamma") %>%
+  group_by(document) %>%
+  top_n(1, gamma)
+
+sherlock_lda %>%
+  tidy(matrix = "gamma") %>%
+  count(story = document, topic, sort = TRUE)
+
+sherlock_lda %>%
+  tidy(matrix = "gamma") %>%
+  ggplot(aes(x = gamma, fill = factor(topic))) +
+  geom_histogram() +
+  facet_wrap(~document)
+
+sherlock_lda %>%
+  augment(data = sherlock_dtm) %>%
+  count(story = document, .topic, sort = TRUE) %>%
+  arrange(.topic)
