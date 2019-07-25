@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 tidyds.Rproj
+vignettes/m5_modeling-1.Rmd
+vignettes/m6_modeling-2.Rmd
+vignettes/m7_shiny-1.Rmd
+vignettes/m8_shiny-2.Rmd
