@@ -59,6 +59,9 @@ udara_bandung_raw %>%
   group_by(station) %>%
   group_walk(~write_csv(.x, paste0(here("data-raw"), "/", .y$station, ".csv")))
 
+vroom::vroom(fs::dir_ls(path = "data-raw", regexp = "*.csv")[1:4], id = "station") %>%
+  dplyr::mutate(station = gsub(pattern = "\\.csv$", "", basename(station))) %>%
+  readr::write_csv("data-raw/udara_bandung.csv")
 
 # Dirty excel file (from janitor) -----------------------------------------
 
@@ -155,3 +158,6 @@ sherlock_lda %>%
   augment(data = sherlock_dtm) %>%
   count(story = document, .topic, sort = TRUE) %>%
   arrange(.topic)
+
+sherlock_lda %>%
+  tidy()

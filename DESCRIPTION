@@ -14,25 +14,26 @@ Imports:
     devtools,
     dplyr,
     ggplot2,
+    here,
     janitor,
+    magrittr,
+    parsnip,
     readr,
     readxl,
+    recipes,
+    rsample,
     shiny,
-    shinydashboard,
     tidyr,
+    tidytext,
+    topicmodels,
     usethis,
     vroom,
-    here,
-    magrittr,
-    rsample,
-    recipes,
-    parsnip,
-    yardstick,
-    topicmodels
-Encoding: UTF-8
-LazyData: true
-RoxygenNote: 6.1.1
+    yardstick
 Suggests: 
     knitr,
     rmarkdown
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
