@@ -1,8 +1,7 @@
 ---
 title: "Supervised learning"
-output: 
-  github_document:
-    df_print: "tibble"
+author: "Muhammad Aswan Syahputra"
+output: github_document
 ---
 
 ```{r, include = FALSE}
@@ -13,7 +12,7 @@ knitr::opts_chunk$set(
 ```
 <!-- Baris kode di atas merupakan pengaturan untuk dokumen R Markdown dan tidak akan tercetak pada berkas dokumen akhir -->
 
-> Dalam modul ini Anda akan diajak untuk membuat model dan melakukan prediksi.
+> Dalam modul ini Anda akan diajak untuk membuat pemodelan dan melakukan prediksi menggunakan model tersebut.
 
 Pembelajaran mesin (*machine learning*) merupakan aktivitas yang acapkali dilakukan dalam siklus data sains. Sangat menarik apabila memiliki kemampuan untuk membuat prediksi suatu hal sehingga kita dapat melakukan persiapan lebih matang.
 
