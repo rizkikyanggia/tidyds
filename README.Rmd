@@ -14,27 +14,40 @@ knitr::opts_chunk$set(
 ```
 # Fundamental Tidy Data Science in R
 
-## Konfigurasi git
+## Prosedur
 
-```{bash, eval = FALSE}
-git config --global user.name "Nama Anda"
-git config --global user.email "Email Anda"
-```
+1. Klik tombol **Fork** pada bagian kanan atas
+2. Setelah berhasil silakan klik tombol **Clone or download** (tombol berwarna hijau pada bagian kanan)
+3. Pilih prosedur HTTPS dan salin tautan URL yang disediakan
+4. Buka RStudio Anda dan kemudian pilih menu **"File -- New Project" **
+5. Pilih opsi **Version Control - Git**
+6. Tempelkan tautan yang telah disalin serta sesuaikan lokasi direktori sesuai keinginan Anda
+7. Klik tombol **Create Project**
 
-## Pemasangan paket
+## Persiapan
+
+Jalankan baris kode berikut untuk mempersiapkan paket-paket yang akan digunakan selama pelatihan:
 
 ```{r, eval=FALSE}
 install.packages("devtools")
 devtools::install_deps()
-```
-
-```{r, eval=FALSE}
 devtools::load_all()
 tidyds::check_deps()
 ```
 
 ## Struktur direktori
+
+Repositori ini tersusun atas subdirektori, berkas, dan dokumen sebagai berikut:
+
 ```{bash, echo = FALSE}
 tree
 ```
 
+## Konfigurasi git
+
+Anda perlu melakukan konfigurasi git agar dapat melakukan prosedur "Push" dan **Pull** repositori lokal ke repositori daring di GitHub. Hal ini dapat dilakukan melalui RStudio dengan cara klik menu **"Tools -- Terminal"** dan menjalankan baris kode berikut:
+
+```{bash, eval = FALSE}
+git config --global user.email "Email Anda"
+git config --global user.name "Nama Anda"
+```
