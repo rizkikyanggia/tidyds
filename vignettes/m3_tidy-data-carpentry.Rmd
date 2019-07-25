@@ -1,5 +1,6 @@
 ---
 title: "Into tidy data and data carpentry"
+author: "Muhammad Aswan Syahputra"
 output: github_document
 ---
 

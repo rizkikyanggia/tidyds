@@ -1,5 +1,6 @@
 ---
 title: "Grammar of graphic for data visualisation"
+author: "Muhammad Aswan Syahputra"
 output: github_document
 ---
 

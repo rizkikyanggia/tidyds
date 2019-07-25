@@ -1,5 +1,6 @@
 ---
 title: "Data import and troubleshoots"
+author: "Muhammad Aswan Syahputra"
 output: github_document
 ---
 

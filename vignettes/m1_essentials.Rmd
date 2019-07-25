@@ -1,5 +1,6 @@
 ---
 title: "Essentials"
+author: "Muhammad Aswan Syahputra"
 output: github_document
 ---
 
