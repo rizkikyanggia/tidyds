@@ -19,10 +19,10 @@ knitr::opts_chunk$set(
 Bagaimana jika ada satu format dokumen yang dapat menggabungkan antara narasi, kode pemrograman, dan keluaran dari kode tersebut dalam satu wadah sekaligus? R Markdown adalah jawabannya! Melalui dokumen R Markdown Anda dapat menuliskan kode analisis data, mengeksekusi kode tersebut, dan memberikan teks interpretasi untuk analisis data tersebut. Jika Anda pernah mendengar atau menggunakan Jupyter Notebook, maka R Markdown adalah ekuivalen untuk format dokumen tersebut. Informasi lebih lanjut mengenai R Markdown dapat dilihat pada pranala [ini](http://rmarkdown.rstudio.com).
 
 Di dokumen R Markdown Anda dapat melakukan pengaturan teks dengan menggunakan Markdown. Silakan klik menu "Help -- Markdown Quick Reference" untuk melihat sontekan cara pengaturan teks menggunakan Markdown langsung dari RStudio. Buatlah penomoran (*numbering*) dan pengaturan untuk teks di bawah ini:
-
-1. Kalimat ini dicetak tebal
-2. Kalimat ini dicetak miring
-3. Kalimat ini berisi tautan https://www.markdownguide.org/getting-started
+*
+1. **Kalimat ini dicetak tebal**
+2. *Kalimat ini dicetak miring*
+3. [Kalimat ini berisi tautan](https://www.markdownguide.org/getting-started)
 
 Seperti disebutkan sebelumnya bahwa Anda juga dapat menuliskan kode pemrograman di dokumen R Markdown. Namun untuk membedakan antara teks biasa dengan kode pemrograman diperlukan suatu blok yang disebut dengan *chunk* (di Jupyter Notebook disebut sebagai *cell*). Suatu *chunk* ditandai dengan adanya tiga *backtics* "`" pada awal dan akhir baris kode pemrograman seperti contoh berikut:
 
@@ -40,10 +40,12 @@ summary(mtcars) # melihat rigkasan statustik dari data data mtcars
 
 Kombinasi "Ctrl + Alt + I" dapat Anda gunakan untuk membuah *chunk* dengan bahasa pemrograman R. Buatlah *chunk* baru berisi kode pemrograman R sebagai berikut!
 
+```{r}
 filled.contour(volcano,
                color.palette = terrain.colors, 
                plot.title = title("Topografi Gunung Maunga Whau"), 
                key.title = title("Tinggi\n(meter)"))
+```
 
 Bagaimana cara menjalankan baris kode yang telah Anda tulis? Anda dapat melakukan evaluasi atau eksekusi baris kode yang terdapat di dalam *chunk* dengan cara menekan "Ctrl + Enter" atau "Ctrl + Shift + Enter". Dapatkan Anda menebak perbedaan antara dua kombinasi kibor tersebut?
 
@@ -55,7 +57,7 @@ Kemudian bagaimana cara mengatur dan memproduksi dokumen final tersebut? Caranya
 
 Jalankanlah kode dalam *chunk* berikut:
 ```{r}
-"Halo, nama saya adalah ..." # isi dengan nama Anda
+"Halo, nama saya adalah kiky" # isi dengan nama Anda
 ```
 
 Saat Anda menjalankan *chunk* di atas, R akan mengevaluasi dan melakukan eksekusi pada baris kode yang dituliskan. Dalam contoh di atas, keluaran dari eksekusi baris kode adalah kalimat "Halo, nama saya adalah (nama Anda)" yang tercetak di dokumen R Markdown atau konsol RStudio. Mengapa kalimat "# isi dengan nama Anda" tidak ikut tercetak?
